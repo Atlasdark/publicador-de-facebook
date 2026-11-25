@@ -1,0 +1,38 @@
+POWER GYM - ASISTENTE PARA PUBLICAR EN GRUPOS
+=============================================
+
+QUE HACE
+El programa elige un grupo y un anuncio, abre el grupo y deja el texto y la imagen
+listos para pegar. TU pegas y haces clic en "Publicar". No publica solo.
+
+INSTALACION (una sola vez)
+1. Instala Python desde https://www.python.org/downloads/
+   IMPORTANTE: al instalar marca "Add python.exe to PATH".
+2. Descomprime esta carpeta (clic derecho -> Extraer todo). No la uses desde dentro del .zip.
+3. Doble clic en  instalar.bat  y escribe tu numero de persona (1, 2, 3 o 4).
+4. Se crea en el escritorio el acceso "Publicar Power Gym".
+
+ANTES DE PUBLICAR
+- Abre Chrome o Edge con TU cuenta de Facebook (la que tiene acceso a la pagina Power Gym).
+- Cambia a la identidad de la pagina Power Gym (foto de perfil -> cambiar a Power Gym).
+- Ese navegador debe ser el predeterminado de Windows, porque ahi se abren los grupos.
+
+COMO PUBLICAR
+1. Doble clic en "Publicar Power Gym".
+2. Se abre un grupo. Haz clic dentro de "Escribe algo..." y luego dentro del cuadro de texto.
+3. Ctrl+V  -> pega el TEXTO.
+4. Espera un segundo y Ctrl+V otra vez -> pega la IMAGEN.
+   (Si algo sale mal: F8 vuelve a copiar el texto, F9 vuelve a copiar la imagen.)
+5. Revisa que arriba diga "Power GYM" (la pagina), y que texto e imagen se vean bien.
+6. Haz clic en Publicar. En la ventana negra responde  s  y Enter.
+7. Maximo 3 grupos al dia por persona. El programa te avisa cuando llegues al limite.
+
+REGLAS
+- NO publiques mas de lo que dice el programa.
+- Si un grupo dice que no se permite publicidad, escribe  n  para omitirlo y avisa a tu encargado.
+- NUNCA compartas tu contrasena de Facebook ni la carpeta de tu navegador con nadie.
+
+PROBLEMAS
+- "No encuentro Python": repite el paso 1 marcando "Add python.exe to PATH".
+- El segundo Ctrl+V no pega la imagen: pulsa F9 y luego Ctrl+V.
+- Cualquier otro error: toma foto o copia el texto de la ventana negra y mandalo al encargado.

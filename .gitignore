@@ -1,0 +1,11 @@
+venv/
+perfil_fb/
+__pycache__/
+*.pyc
+*.bak
+debug_error.png
+media/temp/
+data/historial.csv
+data/ayudante.txt
+data/spintax_uso.json
+*.zip
