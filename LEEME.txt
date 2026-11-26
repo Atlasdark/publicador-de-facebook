@@ -41,7 +41,7 @@ Si necesitas extraer nuevos grupos y actualizar tu lista, sigue estos pasos:
 5. Espera unos 25 segundos hasta que en la consola aparezca "TOTAL: ..." junto con la lista de grupos.
 6. Escribe **copy(salida)** y presiona Enter (esto copia automáticamente todos los grupos al portapapeles).
 7. Abre el archivo **data\lista_grupos.txt** con el Bloc de notas, pega los nuevos grupos debajo de los que ya tienes y guarda el archivo (limpia emojis o caracteres raros si aparecen).
-8. Ejecuta en tu computadora el script **python obtener_grupos.py**.
+8. Ejecuta en tu computadora el script **python obtener_grupos.py**. Rcuerden estar en el entorno venv de python
    - El programa agregará únicamente los grupos nuevos conservando las fechas y registros de los que ya tenías. 
    - Nota: Si te saliste de algún grupo, quítalo a mano directamente del archivo **data\grupos.csv**.
 
