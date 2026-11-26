@@ -1,56 +1,55 @@
 @echo off
-chcp 65001 >nul
 cd /d "%~dp0"
-title Instalacion Power Gym
-echo ============================================
-echo   INSTALACION - Power Gym (ayudantes)
-echo ============================================
-echo.
+cls
+echo ===================================================
+echo    CONFIGURANDO AUTOMATICAMENTE: PUBLICAR POWER GYM
+echo ===================================================
 
-where python >nul 2>nul
-if errorlevel 1 (
-  echo [X] No encuentro Python en esta computadora.
-  echo     1. Descargalo de https://www.python.org/downloads/
-  echo     2. Al instalar, MARCA la casilla "Add python.exe to PATH"
-  echo     3. Vuelve a abrir este instalador.
-  echo.
-  pause
-  exit /b 1
-)
-
+:: 1. Crear entorno virtual si no existe
 if not exist venv (
-  echo [*] Creando entorno...
-  python -m venv venv
-  if errorlevel 1 (
-    echo [X] No pude crear el entorno. Avisa a tu encargado.
-    pause
-    exit /b 1
-  )
+    echo [+] Creando entorno virtual de Python...
+    python -m venv venv
 )
 
-echo [*] Instalando programas necesarios (puede tardar un par de minutos)...
-call venv\Scripts\activate.bat
-python -m pip install --disable-pip-version-check -r requirements.txt
-if errorlevel 1 (
-  echo [X] Fallo la instalacion. Revisa tu internet y vuelve a intentar.
-  pause
-  exit /b 1
+:: 2. Activar entorno e instalar dependencias
+echo [+] Instalando librerias necesarias...
+call venv\Scripts\activate
+python -m pip install --upgrade pip
+if exist requirements.txt (
+    pip install -r requirements.txt
 )
 
-echo.
-echo Cual es tu numero de persona? (el encargado te lo dira: 1, 2, 3 o 4)
-choice /c 1234 /n /m "Numero: "
-set NUM=%errorlevel%
+:: 3. Crear carpetas necesarias automaticamente
+echo [+] Creando carpetas de trabajo (data y media)...
 if not exist data mkdir data
->data\ayudante.txt echo %NUM%/4
-echo [OK] Quedaste como persona %NUM% de 4.
+if not exist media mkdir media
 
-echo [*] Creando acceso directo en el escritorio...
-powershell -NoProfile -Command "$ws=New-Object -ComObject WScript.Shell; $d=[Environment]::GetFolderPath('Desktop'); $l=$ws.CreateShortcut($d+'\Publicar Power Gym.lnk'); $l.TargetPath='%~dp0Publicar Power Gym.bat'; $l.WorkingDirectory='%~dp0'; if(Test-Path '%~dp0power_gym.ico'){$l.IconLocation='%~dp0power_gym.ico'}; $l.Save()"
+:: 4. Crear plantillas iniciales si no existen
+if not exist data\lista_grupos.txt (
+    echo # Pega tus grupos aqui un enlace por linea: > data\lista_grupos.txt
+    echo # https://www.facebook.com/groups/123456789/ >> data\lista_grupos.txt
+    echo [+] Se creo la plantilla vacia: data\lista_grupos.txt
+)
+
+if not exist data\spintax.txt (
+    echo === > data\spintax.txt
+    echo ¡Hola! {Aprovecha|No te pierdas} nuestra promo de hoy. ^| @imagen: promo.jpg >> data\spintax.txt
+    echo === >> data\spintax.txt
+    echo [+] Se creo la plantilla de anuncios: data\spintax.txt
+)
+
+:: 5. Ejecutar script para generar grupos.csv inicial si existe el archivo de procesamiento
+if exist obtener_grupos.py (
+    echo [+] Generando archivo grupos.csv inicial...
+    python obtener_grupos.py
+)
 
 echo.
-echo ============================================
-echo   LISTO. En el escritorio tienes el acceso
-echo   "Publicar Power Gym". Lee LEEME.txt.
-echo ============================================
+echo ===================================================
+echo [OK] ¡INSTALACION Y CONFIGURACION COMPLETADAS!
+echo ===================================================
+echo - Tus grupos van en: data\lista_grupos.txt
+echo - Tus anuncios van en: data\spintax.txt
+echo - Tus imagenes van en la carpeta: media\
+echo.
 pause
