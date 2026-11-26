@@ -27,6 +27,24 @@ COMO PUBLICAR
 6. Haz clic en Publicar. En la ventana negra responde  s  y Enter.
 7. Maximo 3 grupos al dia por persona. El programa te avisa cuando llegues al limite.
 
+COMO SACAR Y ACTUALIZAR LOS GRUPOS DE FACEBOOK
+---------------------------------------------
+Si necesitas extraer nuevos grupos y actualizar tu lista, sigue estos pasos:
+
+1. Entra a tu sección de grupos en Facebook (si quieres más grupos, haz clic antes en "Ver todo" en la columna izquierda).
+2. Abre la consola de desarrollador de Google Chrome (presiona F12 o Ctrl + Shift + J).
+3. Si Chrome te pide escribir algo por seguridad, escribe **allow pasting** y presiona Enter.
+4. Copia y pega el siguiente código completo en la consola y presiona Enter:
+
+(async()=>{  for(let i=0;i<15;i++){window.scrollTo(0,document.body.scrollHeight);await new Promise(r=>setTimeout(r,1500));}  const m=new Map();  const basura=["feed","discover","joins","create","notifications"];  document.querySelectorAll("a[href*='/groups/']").forEach(a=>{    const mm=a.href.match(/facebook\.com\/groups\/([^\/?#]+)/);    if(!mm||basura.includes(mm[1]))return;    let t=(a.innerText||"").trim().split("\n")[0].replace(/\|/g,"-");    if(["Ver grupo","Visitar","Ver"].includes(t))t="";    if(!m.has(mm[1])||t.length>m.get(mm[1]).length)m.set(mm[1],t);  });  window.salida=[...m].map(([id,t])=>`${t||"grupo-"+id} | https://www.facebook.com/groups/${id}/`).join("\n");  console.log(window.salida);  console.log("TOTAL:", m.size, "-> ahora escribe: copy(salida)");})();
+
+5. Espera unos 25 segundos hasta que en la consola aparezca "TOTAL: ..." junto con la lista de grupos.
+6. Escribe **copy(salida)** y presiona Enter (esto copia automáticamente todos los grupos al portapapeles).
+7. Abre el archivo **data\lista_grupos.txt** con el Bloc de notas, pega los nuevos grupos debajo de los que ya tienes y guarda el archivo (limpia emojis o caracteres raros si aparecen).
+8. Ejecuta en tu computadora el script **python obtener_grupos.py**.
+   - El programa agregará únicamente los grupos nuevos conservando las fechas y registros de los que ya tenías. 
+   - Nota: Si te saliste de algún grupo, quítalo a mano directamente del archivo **data\grupos.csv**.
+
 REGLAS
 - NO publiques mas de lo que dice el programa.
 - Si un grupo dice que no se permite publicidad, escribe  n  para omitirlo y avisa a tu encargado.
